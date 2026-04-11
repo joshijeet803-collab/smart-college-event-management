@@ -1,0 +1,204 @@
+/* ===== PAGE ===== */
+.events-page {
+  padding: 100px 40px 40px;
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #0f172a, #020617);
+  color: white;
+  text-align: center;
+}
+
+/* ===== TITLE ===== */
+.events-page h1 {
+  font-size: 40px;
+  margin-bottom: 40px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* ===== GRID ===== */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ===== CARD ===== */
+.event-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.4s;
+  background: #111;
+}
+
+/* IMAGE */
+.event-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  transition: 0.5s;
+}
+
+/* DARK OVERLAY */
+.event-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+/* CONTENT */
+.event-card-content {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  right: 15px;
+  z-index: 2;
+  text-align: left;
+}
+
+/* TITLE */
+.event-card h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+/* DATE */
+.event-card p {
+  font-size: 13px;
+  color: #bbb;
+}
+
+/* BUTTON */
+.event-card button {
+  margin-top: 10px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 20px;
+  background: #e50914;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* HOVER EFFECT */
+.event-card:hover {
+  transform: scale(1.08);
+  z-index: 5;
+}
+
+.event-card:hover img {
+  transform: scale(1.15);
+}
+
+.event-card:hover button {
+  background: #ff1f1f;
+}
+
+/* ===================================================== */
+/* 🔥🔥🔥 NETFLIX LEVEL MODAL (FINAL FIX) 🔥🔥🔥 */
+/* ===================================================== */
+
+/* OVERLAY */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+
+  z-index: 9999;
+}
+
+/* BOX */
+.modal-box {
+  width: 380px;
+  padding: 30px;
+
+  background: #111;
+  border-radius: 15px;
+
+  text-align: center;
+
+  box-shadow: 0 0 40px rgba(0,255,200,0.3);
+
+  animation: popup 0.3s ease;
+}
+
+/* TITLE */
+.modal-title {
+  color: #00f5d4;
+  margin-bottom: 15px;
+}
+
+/* INPUT */
+.modal-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+
+  border-radius: 8px;
+  border: none;
+
+  background: #1c1c1c;
+  color: white;
+
+  outline: none;
+
+  pointer-events: auto; /* 🔥 FIX CLICK ISSUE */
+}
+
+/* BUTTON */
+.modal-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: linear-gradient(135deg, #00f5d4, #00bbf9);
+  color: black;
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* HOVER */
+.modal-box button:hover {
+  transform: scale(1.05);
+}
+
+/* CANCEL */
+.cancel-btn {
+  background: #333 !important;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: red !important;
+}
+
+/* ANIMATION */
+@keyframes popup {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,53 @@
+.admin-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  color: white;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.admin-navbar h2 {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.admin-nav-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.admin-nav-links button {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.admin-nav-links button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 10px #00c6ff;
+}
+
+.logout-btn {
+  background: linear-gradient(90deg, #ff4b2b, #ff416c) !important;
+}
+
+.admin-page h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px rgba(0,198,255,0.7);
+}
