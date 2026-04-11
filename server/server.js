@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-console.log("🚀 SERVER FILE RUNNING..."); // 🔥 DEBUG
+console.log("🚀 SERVER FILE RUNNING...");
 
 const app = express();
 
@@ -11,7 +11,7 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
 // ================= DB CONNECT =================
-mongoose.connect("mongodb://127.0.0.1:27017/collegeEvents")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.log("❌ DB Error:", err));
 
@@ -37,24 +37,18 @@ const Registration = mongoose.model("Registration", RegistrationSchema);
 
 // ================= ROUTES =================
 
-// ✅ GET EVENTS
+// GET EVENTS
 app.get("/api/events", async (req, res) => {
-  console.log("🔥 API HIT → GET /api/events"); // 🔥 DEBUG
-
   try {
     const events = await Event.find();
     res.json(events);
   } catch (err) {
-    console.log("❌ GET ERROR:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// ✅ ADD EVENT
+// ADD EVENT
 app.post("/api/events", async (req, res) => {
-  console.log("🔥 API HIT → POST /api/events");
-  console.log("BODY:", req.body); // 🔥 DEBUG
-
   try {
     const { title, date, image, description } = req.body;
 
@@ -62,27 +56,18 @@ app.post("/api/events", async (req, res) => {
       return res.status(400).json({ error: "Title & Date required" });
     }
 
-    const event = new Event({
-      title,
-      date,
-      image,
-      description,
-    });
-
+    const event = new Event({ title, date, image, description });
     await event.save();
 
     res.status(201).json({ message: "Event Created", event });
 
   } catch (err) {
-    console.log("❌ POST ERROR:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// ✅ DELETE EVENT
+// DELETE EVENT
 app.delete("/api/events/:id", async (req, res) => {
-  console.log("🔥 API HIT → DELETE EVENT:", req.params.id);
-
   try {
     const deleted = await Event.findByIdAndDelete(req.params.id);
 
@@ -93,15 +78,12 @@ app.delete("/api/events/:id", async (req, res) => {
     res.json({ message: "Event Deleted Successfully" });
 
   } catch (err) {
-    console.log("❌ DELETE ERROR:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// ✅ UPDATE EVENT
+// UPDATE EVENT
 app.put("/api/events/:id", async (req, res) => {
-  console.log("🔥 API HIT → UPDATE EVENT:", req.params.id);
-
   try {
     const updated = await Event.findByIdAndUpdate(
       req.params.id,
@@ -112,46 +94,35 @@ app.put("/api/events/:id", async (req, res) => {
     res.json(updated);
 
   } catch (err) {
-    console.log("❌ UPDATE ERROR:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// ================= REGISTRATION =================
-
-// ✅ REGISTER
+// REGISTER
 app.post("/api/register", async (req, res) => {
-  console.log("🔥 API HIT → REGISTER");
-
   try {
     const reg = new Registration(req.body);
     await reg.save();
     res.status(201).json({ message: "Registered" });
 
   } catch (err) {
-    console.log("❌ REGISTER ERROR:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// ✅ GET REGISTRATIONS
+// GET REGISTRATIONS
 app.get("/api/registrations", async (req, res) => {
-  console.log("🔥 API HIT → GET /api/registrations");
-
   try {
     const data = await Registration.find();
     res.json(data);
 
   } catch (err) {
-    console.log("❌ REG GET ERROR:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// ✅ DELETE REGISTRATION
+// DELETE REGISTRATION
 app.delete("/api/registrations/:id", async (req, res) => {
-  console.log("🔥 API HIT → DELETE REG:", req.params.id);
-
   try {
     const deleted = await Registration.findByIdAndDelete(req.params.id);
 
@@ -162,18 +133,12 @@ app.delete("/api/registrations/:id", async (req, res) => {
     res.json({ message: "Registration Deleted" });
 
   } catch (err) {
-    console.log("❌ REG DELETE ERROR:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// ================= ERROR HANDLER =================
-app.use((err, req, res, next) => {
-  console.error("❌ GLOBAL ERROR:", err.stack);
-  res.status(500).json({ error: "Something went wrong!" });
-});
-
 // ================= START =================
-app.listen(5000, () => {
-  console.log("🚀 Server running on port 5000");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
