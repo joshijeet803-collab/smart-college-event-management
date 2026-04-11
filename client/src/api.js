@@ -1,4 +1,4 @@
-const API = "http://localhost:5000/api";
+const API = "https:smart-college-backend-3fnx.onrender.com/api";
 
 export const getEvents = async () => {
   const res = await fetch(`${API}/events`);
