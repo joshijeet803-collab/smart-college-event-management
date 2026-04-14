@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config(); // ✅ ADDED (VERY IMPORTANT)
 
 console.log("🚀 SERVER FILE RUNNING...");
 
