@@ -8,12 +8,12 @@ function AdminDashboard() {
 
   useEffect(() => {
     document.title = "Admin Panel";
-    fetch("http://localhost:5000/api/events")
+    fetch("https://smart-college-backend-3fnx.onrender.com/api/events")
       .then(res => res.json())
       .then(data => setEvents(data))
       .catch(() => setEvents([]));
 
-    fetch("http://localhost:5000/api/registrations")
+    fetch("https://smart-college-backend-3fnx.onrender.com/api/registrations")
       .then(res => res.json())
       .then(data => setRegistrations(data))
       .catch(() => setRegistrations([]));
